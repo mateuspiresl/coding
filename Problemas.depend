@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1453251433 source:c:\mateus\projects\codeblocks\problemas\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+
