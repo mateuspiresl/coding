@@ -14,35 +14,45 @@ LANG: C++
 using namespace std;
 
 class Person {
-	vector<Person> receivers;
+	vector<Person*> receivers;
 	int initialMoney;
 	int money;
 
 	public:
-		//Person();
+		Person();
 		void setMoney(int);
-		void addReceiver(Person);
+		void addReceiver(Person*);
 		void share();
 		void receive(int);
 		int difference();
 };
 
-void Person::setMoney(int initial_money) {
-	initialMoney = initial_money;
-	money = initial_money;
+Person::Person()
+{
+	initialMoney = 0;
+	money = 0;
 }
 
-void Person::addReceiver(Person receiver) {
+void Person::setMoney(int initial_money)
+{
+	initialMoney = initial_money;
+	money += initial_money;
+}
+
+void Person::addReceiver(Person* receiver) {
 	receivers.push_back(receiver);
 }
 
 void Person::share()
 {
+	if (receivers.size() == 0)
+		return;
+
 	int toShare = initialMoney / receivers.size();
 	money -= toShare * receivers.size();
 
-	for (vector<Person>::iterator it = receivers.begin(); it != receivers.end(); ++it)
-		it->receive(toShare);
+	for (vector<Person*>::iterator it = receivers.begin(); it != receivers.end(); ++it)
+		(*it)->receive(toShare);
 }
 
 void Person::receive(int given) {
@@ -61,46 +71,47 @@ int main()
 	int n;
 	fin >> n;
 
-	map<string, Person> people;
-	queue<Person> row;
+	map<string, Person*> people;
+	queue<string> peopleNames;
 
 	for (int i = 0; i < n; i++)
 	{
 		string name;
-		cin >> name;
-		Person person;
+		fin >> name;
+		Person* person = new Person();
 
-		people.insert(pair<string, Person>(name, person));
-		row.push(person);
+		people.insert(pair<string, Person*>(name, person));
+		peopleNames.push(name);
 	}
 
 	for (int i = 0; i < n; i++)
 	{
 		string giver;
-		cin >> giver;
-
-		Person person = people.find(giver)->second;
+		fin >> giver;
 
 		int money, personCount;
-		cin >> money >> personCount;
+		fin >> money >> personCount;
 
-		person.setMoney(money);
+		Person* person = people.find(giver)->second;
+		person->setMoney(money);
 
 		while (personCount--)
 		{
 			string receiver;
-			cin >> receiver;
+			fin >> receiver;
 
-			person.addReceiver(people.find(receiver)->second);
+			person->addReceiver(people.find(receiver)->second);
 		}
 
-		person.share();
+		person->share();
 	}
 
-	while (n--)
+	while ( ! peopleNames.empty())
 	{
-		fout << row.front().difference() << "\n";
-		row.pop();
+		string name = peopleNames.front();
+		peopleNames.pop();
+
+		fout << name << " " << people.find(name)->second->difference() << "\n";
 	}
 
 	return 0;
