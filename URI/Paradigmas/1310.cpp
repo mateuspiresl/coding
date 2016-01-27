@@ -1,7 +1,4 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <climits>
 
 using namespace std;
 
@@ -14,33 +11,44 @@ int main()
 		int cost;
 		cin >> cost;
 
-		int days[numDays + 1];
+		int days[numDays];
 
-		for (int i = 1; i <= numDays; i++)
+		for (int i = 0; i < numDays; i++)
 		{
 			cin >> days[i];
 			days[i] -= cost;
 		}
 
-		int profit[numDays + 1][numDays + 1];
+		int begin = 0, end = numDays - 1;
+		while (days[begin] < 0 && begin < end) begin++;
+		while (days[end] < 0 && end >= begin) end--;
 
-		for (int i = 1; i < numDays; i++)
-			profit[i][1] = days[i];
+		if (begin > end)
+			cout << 0 << endl;
 
-		int bestProfit = 0;
-
-		for (int c = 2; c <= numDays; c++)
+		else if (begin == end)
+			cout << days[begin] << endl;
+		
+		else
 		{
-			for (int d = c; d <= numDays; d++)
+			int profit[numDays][numDays];
+			int bestProfit = 0;
+
+			for (int d = end; d >= begin; d--)
 			{
-				profit[d][c] = profit[d - 1][c - 1] + days[d];
+				profit[d][0] = days[d];
+			
+				for (int c = 1; c < end - d + 1; c++)
+				{
+					profit[d][c] = days[d] + profit[d + 1][c - 1];
 
-				if (profit[d][c] > bestProfit)
-					bestProfit = profit[d][c];
+					if (profit[d][c] > bestProfit)
+						bestProfit = profit[d][c];
+				}
 			}
-		}
 
-		cout << bestProfit << endl;
+			cout << bestProfit << endl;
+		}
 	}
 
 	return 0;
