@@ -37,6 +37,9 @@ int main()
 			for (int d = end; d >= begin; d--)
 			{
 				profit[d][0] = days[d];
+
+				if (profit[d][0] > bestProfit)
+					bestProfit = profit[d][0];
 			
 				for (int c = 1; c < end - d + 1; c++)
 				{
