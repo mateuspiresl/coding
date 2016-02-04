@@ -3,76 +3,68 @@
 using namespace std;
 
 struct Node {
-	Node* left;
-	Node* right;
+	Node* left = NULL;
+	Node* right = NULL;
 	char c;
 };
 
-string pre, in, pos;
-int preLen, preIn;
+// Caractere atual na prefixa
+string::iterator p;
 
-void runLeft(Node* node; int p, string in)
+Node* find(string in)
 {
-	node->left = new Node;
-	node = node->left;
-	node->c = pre[p];
-
-	p++;
-
-	if (strlen(in) > 0)
+	if (in.length())
 	{
 		string str;
-		str.push_back(pre[p]);
+		str.push_back(*p);
 
 		size_t i = in.find_first_of(str);
 
 		if (i != string::npos)
 		{
-			runLeft(node, p, in.substr(0, i + 1));
-			runRight(node, p, in.substr(i + 1, strlen(in) - i));
-		}
-		else
-		{
-			
+			Node* node = new Node;
+			node->c = *p++;
+
+			if (*p != '\0')
+			{
+				node->left = find(in.substr(0, i));
+				node->right = find(in.substr(i + 1, in.length() - i));
+			}
+
+			return node;
 		}
 	}
+
+	return NULL;
 }
 
-void runRight(Node* node; int p, string in)
+void printTree(Node* node)
 {
-	if (strlen(in) > 0)
-	{
-		string str;
-		str.push_back(pre[p]);
+	if (node == NULL) return;
 
-		size_t i = in.find_first_of(str);
+	printTree(node->left);
+	printTree(node->right);
 
-		if (i != string::npos)
-		{
-			runLeft(node, p, in.substr(0, i + 1));
-			runRight(node, p, in.substr(i + 1, strlen(in) - i));
-		}
-		else
-		{
-			
-		}
-	}
+	cout << node->c;
 }
 
 int main()
 {
-	cin >> pre >> in;
+	int n;
+	cin >> n;
 
-	preLen = strlen(pre);
-	preIn = strlen(in);
-
-	Node root;
-	root.c = pre[0];
-	Node* node = &root;
-
-	for (int p = 0; p < 0; p--)
+	while (n--)
 	{
-		
+		int len;
+		string pre, in;
+
+		cin >> len >> pre >> in;
+
+		p = pre.begin();
+		Node* root = find(in);
+
+		printTree(root);
+		cout << endl;
 	}
 
 	return 0;
