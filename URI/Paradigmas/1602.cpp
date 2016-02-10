@@ -11,21 +11,13 @@ int divisors[MAX + 1];
 int main()
 {
 	memset(&prime, true, sizeof(bool) * (MAX + 1));
-	memset(&divisors, 0, sizeof(int) * (MAX + 1));
 
 	for (int i = 2; i <= MAX; i++)
-	{
 		if (prime[i])
-		{
-			divisors[i] = 2;
-
-			for (int j = i + i; j <= MAX; j += i)
-			{
-				divisors[j] += 1 + divisors[j / i];
+			for (int j = i + i; j*j <= MAX; j += i)
 				prime[j] = false;
-			}
-		}
-	}
+
+	
 
 	int hiperprimes = 0;
 
