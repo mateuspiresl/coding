@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const int MAX = 10e6;
+const int MAX = 2 * 10e6;
 
 bool prime[MAX + 1];
 int divisors[MAX + 1];
