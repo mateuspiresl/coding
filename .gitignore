@@ -2,4 +2,6 @@ obj/
 bin/
 *.depend
 in
+out
+answer
 uri.exe
