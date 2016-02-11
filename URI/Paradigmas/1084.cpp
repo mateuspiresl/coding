@@ -1,9 +1,23 @@
 #include <iostream>
-#include <sstream>
 
 //#define pl(_s) cout << _s << endl;
 
 using namespace std;
+
+struct Node
+{
+public:
+	Node* next;
+	char value;
+	int index;
+
+	Node(int _value, int i, Node* _next = NULL)
+	{
+		next = _next;
+		value = _value;
+		index = i;
+	}
+};
 
 int main()
 {
@@ -19,23 +33,44 @@ int main()
 		string number;
 		cin >> number;
 
-		int answerSize(0);
-		int answerMax = n - d;
+		int ansSize = n - d;
+		int i = n - ansSize;
 
-		int greater(0);
-		int i(0);
+		Node* root = new Node(number[i], i);
+		Node* node = root;
 
-		while (i < n && answerSize < answerMax)
+		for (i++; i < n; i++)
 		{
-			int j = d + answerSize;
+			node->next = new Node(number[i], i);
+			node = node->next;
+		}
 
-			for (i = greater + 1; i <= j; i++)
-				if (number[i] > number[greater])
-					greater = i;
+		for (i = n - ansSize - 1; i >= 0; i--)
+		{
+			node = root;
 
-			cout << number[greater];
-			answerSize++;
-			greater++;
+			if (number[i] >= node->value)
+			{
+				root = new Node(number[i], i, node);
+
+				Node* comp = node;
+				node = root;
+
+				while (comp->next != NULL && comp->value >= comp->next->value)
+				{
+					node = comp;
+					comp = comp->next;
+				}
+
+				node->next = comp->next;
+				//delete comp;
+			}
+		}
+
+		while (root != NULL)
+		{
+			cout << root->value;
+			root = root->next;
 		}
 
 		cout << endl;
