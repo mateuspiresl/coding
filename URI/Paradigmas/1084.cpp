@@ -1,9 +1,30 @@
 #include <iostream>
 
-//#define pl(_s) cout << _s << endl;
+#define pl(_s) cout << _s << endl;
 
 using namespace std;
 
+int main()
+{
+	int length, erase;
+
+	while (true)
+	{
+		cin >> length >> erase;
+
+		if ( ! length && ! erase)
+			break;
+
+		string number;
+		cin >> number;
+
+		int erased = 0;
+	}
+
+	return 0;
+}
+
+/*
 struct Node
 {
 public:
@@ -78,3 +99,4 @@ int main()
 
 	return 0;
 }
+*/
