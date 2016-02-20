@@ -9,23 +9,28 @@ struct Node
 };
 
 bool solve(Node* root, int k);
+void swap(Node* a, Node* b);
 
 int main()
 {
-	int size = 8;
-	int arr[8] = { 1, 2, 3, 4, 5, 6, 7, 8 };
-	int k = 3;
+	int size, k;
+	cin >> size >> k;
+
+	int* arr;
 
 	Node* root = new Node;
 	Node* node = root;
-	node->value = arr[0];
 
-	for (int i = 1; i < size; i++)
+	while (size--)
 	{
 		node->next = new Node;
 		node = node->next;
-		node->value = arr[i];
+		cin >> node->value;
 	}
+
+	node = root;
+	root = root->next;
+	delete node;
 
 	solve(root, k);
 
@@ -35,49 +40,54 @@ int main()
 		root = root->next;
 	}
 
+	cout << endl;
+
 	return 0;
+}
+
+void swap(Node** root, Node** node)
+{
+	Node* aux = *node;
+	*node = (*node)->next;
+	aux->next = *root;
+	*root = aux;
 }
 
 bool solve(Node* root, int k)
 {
-	int counter = 0;
+	// IDA
 
-	Node* first;
-	if (counter == k)
-		first = root;
-	
-	Node* node = root->next;
-	root->next = NULL;
+	int counter = 1;
 
-	while (node != NULL)
+	Node* node = root;
+	root = NULL;
+
+	while (node != NULL && counter < k)
 	{
-		if (counter == k)
-			first = node;
-
-		Node* aux = node;
-		node = node->next;
-		aux->next = root;
-		root = aux;
-
 		counter++;
+		swap(&root, &node);
 	}
 
-	if (k < counter)
+	if (k >= counter)
 		return false;
 
-	counter = 0;
+	Node* first = node;
+
+	while (node != NULL)
+		swap(&root, &node);
+
+	// VOLTA
+
 	node = root;
 	root = NULL;
 
-	while (k > 0)
-	{
-		Node* aux = node;
-		node = node->next;
-		aux->next = root;
-		root = aux;
-	}
+	while (--k)
+		swap(&root, &node);
 	
 	int aux = first->value;
 	first->value = node->value;
 	node->value = aux;
+
+	while (node != NULL)
+		swap(&root, &node);
 }
