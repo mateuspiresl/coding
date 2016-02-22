@@ -32,15 +32,17 @@ int main()
 	root = root->next;
 	delete node;
 
-	solve(root, k);
-
-	while (root != NULL)
+	if (solve(root, k))
 	{
-		cout << root->value << " ";
-		root = root->next;
-	}
+		while (root != NULL)
+		{
+			cout << root->value << " ";
+			root = root->next;
+		}
 
-	cout << endl;
+		cout << endl;
+	}
+	else cout << "Erro!" << endl;
 
 	return 0;
 }
@@ -68,7 +70,7 @@ bool solve(Node* root, int k)
 		swap(&root, &node);
 	}
 
-	if (k >= counter)
+	if (counter < k)
 		return false;
 
 	Node* first = node;
@@ -90,4 +92,6 @@ bool solve(Node* root, int k)
 
 	while (node != NULL)
 		swap(&root, &node);
+
+	return true;
 }
