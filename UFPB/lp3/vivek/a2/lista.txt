@@ -1,0 +1,16 @@
+Segunda Lista de Exercícios de LP3 - Listas Encadeadas:
+Ex1:
+[Google] Give you an array which has n integers,it has both positive and negative integers. Now you need sort this array in a special way.After that,the negative integers should in the front,and the positive integers should in the back.
+Also the relative position should not be changed.
+eg. -1 1 3 -2 2 ans: -1 -2 1 3 2.
+O(n)time complexity and O(1) space complexity is perfect.
+Ex2 [Amazon]: Given a singly link list and a number K; swap the Kth node from the start with the Kth node from the last. Check all the edge cases.
+Sample Input: 1->;2->;3->;4->;5->;6->;7->;8 and K = 3
+Sample Output : 1->;2->;6->;4->;5->;3->;7->;8
+Sample Input: 1->;2->;3->;4->;5->;6->;7->;8 and K = 10
+Sample Output: print error "LIST IS OF LESSER SIZE";
+Ex3: [Amazon] How would you find the nth to last element in a linked list?
+Ex4: [Microsoft] 
+Given a linked list with next and high pointers, populate high pointers to the next higher node, inplace and O(n).
+Ex5: Reverse a linked list using recursion.
+Ex6: Write code to convert a binary serach tree into a sorted doubly linked list. The algorithm should use recursion and should be done in place.
