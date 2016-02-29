@@ -1,58 +1,81 @@
 #include <iostream>
 #include <vector>
 
-#include "vertex.cpp"
+#include "graph.h"
+#include "edge.h"
 
-template <class Value, class Weight>
-class Graph {
+int Graph::insert(Vertex* vertex)
+{
+	V.push_back(vertex);
+	return V.size() - 1;
+}
 
-	std::vector<Vertex<Value, Weight>*> vertices;
-	std::set<Vertex<Value, Weight>*> inserted;
+Vertex* Graph::at(int index) {
+	return V[index];
+}
 
-public:
+int Graph::indexOf(Vertex* vertex)
+{
+	for (int i = 0; i < V.size(); i++)
+		if (V[i] == vertex)
+			return i;
 
-	bool insertVertex(Vertex<Value, Weight>* vertex)
+	return -1; 
+}
+
+void Graph::direct(int from, int to, int weight) {
+	at(from)->neighbors.push_back(new Edge(at(to), weight));
+}
+
+void Graph::connect(int a, int b, int weight) {
+	direct(a, b, weight);
+	direct(b, a, weight);
+}
+
+bool Graph::dfs_findVertex(Vertex* source, Vertex* vertex)
+{
+	std::set<Vertex*> visited;
+	return dfs_findVertex_(source, vertex, &visited);
+}
+
+bool Graph::dfs_findVertex_(Vertex* source, Vertex* vertex, std::set<Vertex*>* visited)
+{
+	if (source == vertex)
+		return true;
+
+	visited->insert(source);
+
+	std::vector<Edge*>::iterator edge = source->neighbors.begin();
+	for (; edge != source->neighbors.end(); edge++)
 	{
-		if (inserted.find(vertex) == inserted.end())
-		{
-			vertices.insert(vertex);
-			inserted.insert(vertex);
-
-			return true;
-		}
-		else return false;
+		if (visited->find((*edge)->to) == visited->end())
+			if (dfs_findVertex_((*edge)->to, vertex, visited))
+				return true;
 	}
 
-	bool depthFirstSearch(Value value)
+	return false;
+}
+
+bool Graph::dfs_findValue(Vertex* source, int value)
+{
+	std::set<Vertex*> visited;
+	return dfs_findValue_(source, value, &visited);
+}
+
+bool Graph::dfs_findValue_(Vertex* source, int value, std::set<Vertex*>* visited)
+{
+	if (source->value == value)
+		return true;
+
+	visited->insert(source);
+
+	std::vector<Edge*>::iterator edge = source->neighbors.begin();
+	for (; edge != source->neighbors.end(); edge++)
 	{
-		if (vertices.size() == 0)
-			return false;
-
-		if (vertices[0].value == value)
-			return true;
-
-		return dfs(value, new set<Vertex<Value>*>, vertices[0]);
+		if (visited->find((*edge)->to) == visited->end())
+			if (dfs_findValue_((*edge)->to, value, visited))
+				return true;
 	}
 
-private:
-
-	bool dfs(Value value, std::set<Vertex<Value>*>* visited, Vertex<Value> vertex)
-	{
-		visited.insert(vertex);
-
-		std::vector<Edge<Value, Weight>*>::iterator neighbor = vertex.neighbors.begin();
-		for (; neighbor != vertex.neighbors.end(); neighbor++)
-		{
-			std::vector<Edge<Value, Weight>*>::iterator found = visited.find(*neighbor);
-
-			if (found != visited.end())
-			{
-				if (neighbor->value == value)
-					return true;
-
-				dfs(value, visited, neighbor);
-			}
-		}
-	}
-
-};
+	return false;
+}

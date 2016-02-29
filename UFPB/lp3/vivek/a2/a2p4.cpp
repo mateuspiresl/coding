@@ -7,39 +7,52 @@ struct Node
 	int value;
 	Node* next;
 	Node* high;
-
-	Node(int _value)
-	{
-		value = _value;
-		next = NULL;
-		high = NULL;
-	}
 };
 
+Node* getList();
 void solveCounting(Node* root);
 void solve(Node* root, int size);
 
 int main()
 {
-	Node* toRoot = new Node(0);;
+	Node* root = getList();
+
+	root->high = root;
+
+	solveCounting(root);
+
+	while (root != NULL)
+	{
+		cout << root->value << " ";
+		root++;
+	}
+	cout << endl;
+
+	return 0;
+}
+
+Node* getList()
+{
+	Node* toRoot = new Node;
 	Node* node = toRoot;
 
-	int value;
-	while (cin >> value)
-		node = node->next = new Node(value);
+	int n;
+	cin >> n;
+
+	while (n--)
+	{
+		int value;
+		cin >> value;
+
+		node->next = new Node;
+		node = node->next;
+		node->value = value;
+	}
 	
 	node = toRoot->next;
 	delete toRoot;
 
-	solveCounting(node);
-
-	while (node != NULL)
-	{
-		cout << node->value << " ";
-		node++;
-	}
-
-	return 0;
+	return node;
 }
 
 void solveCounting(Node* root)

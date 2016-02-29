@@ -3,17 +3,13 @@
 
 #include "vertex.h"
 
-template <class Value, class Weight>
 class Edge {
 
 public:
-	Vertex<Value, Weight>* to;
-	Weight weight;
+	Vertex* to;
+	int weight;
 
-	Edge(Vertex<Value, Weight>* _to, Weight _weight) {
-		to = _to;
-		weight = _weight;
-	}
+	Edge(Vertex* _to, int _weight);
 
 };
 

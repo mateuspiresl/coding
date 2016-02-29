@@ -1,0 +1,3 @@
+Commands
+	size
+		Mostra o quanto que cada sessão do executável ocupa

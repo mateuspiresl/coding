@@ -3,16 +3,14 @@
 
 #include <vector>
 
-#include "edge.h"
-
-template <class Value, class Weight>
+class Edge;
 class Vertex {
 
 public:
-	Value value;
-	std::vector<Edge<Value, Weight>*> neighbors;
+	int value;
+	std::vector<Edge*> neighbors;
 
-	Vertex(Value _value);
+	Vertex(int _value);
 
 };
 
