@@ -1,30 +1,17 @@
-#include <iostream>
-#include <vector>
-
 #include "graph.h"
-#include "edge.h"
 
-int Graph::insert(Vertex* vertex)
+int Graph::insert(vii* vertex)
 {
 	V.push_back(vertex);
 	return V.size() - 1;
 }
 
-Vertex* Graph::at(int index) {
+vii* Graph::at(int index) {
 	return V[index];
 }
 
-int Graph::indexOf(Vertex* vertex)
-{
-	for (int i = 0; i < V.size(); i++)
-		if (V[i] == vertex)
-			return i;
-
-	return -1; 
-}
-
-void Graph::direct(int from, int to, int weight) {
-	at(from)->neighbors.push_back(new Edge(at(to), weight));
+void Graph::direct(int source, int target, int weight) {
+	V[source]->push_back(ii(target, weight));
 }
 
 void Graph::connect(int a, int b, int weight) {
@@ -32,49 +19,75 @@ void Graph::connect(int a, int b, int weight) {
 	direct(b, a, weight);
 }
 
-bool Graph::dfs_findVertex(Vertex* source, Vertex* vertex)
+bool Graph::dfs_connection(int source, int target)
 {
-	std::set<Vertex*> visited;
-	return dfs_findVertex_(source, vertex, &visited);
+	si visited;
+	return dfs_connection_(source, target, &visited);
 }
 
-bool Graph::dfs_findVertex_(Vertex* source, Vertex* vertex, std::set<Vertex*>* visited)
+bool Graph::dfs_connection_(int source, int target, si* visited)
 {
-	if (source == vertex)
+	if (source == target)
 		return true;
 
 	visited->insert(source);
 
-	std::vector<Edge*>::iterator edge = source->neighbors.begin();
-	for (; edge != source->neighbors.end(); edge++)
+	vii::iterator edge = V[source]->begin();
+	for (; edge != V[source]->end(); edge++)
 	{
-		if (visited->find((*edge)->to) == visited->end())
-			if (dfs_findVertex_((*edge)->to, vertex, visited))
+		int neighbor = edge->first;
+
+		if (visited->find(neighbor) == visited->end())
+			if (dfs_connection_(neighbor, target, visited))
 				return true;
 	}
 
 	return false;
 }
 
-bool Graph::dfs_findValue(Vertex* source, int value)
+bool Graph::dfs_insideCicle(int index)
 {
-	std::set<Vertex*> visited;
-	return dfs_findValue_(source, value, &visited);
+	si visited;
+
+	vii::iterator edge = V[index]->begin();
+	for (; edge != V[index]->end(); edge++)
+	{
+		int neighbor = edge->first;
+		visited.insert(neighbor);
+
+		vii::iterator neiEdge = V[neighbor]->begin();
+		for (; neiEdge != V[neighbor]->end(); neiEdge++)
+		{
+			int neiNeighbor = neiEdge->first;
+
+			if (neiNeighbor != index && visited.find(neiNeighbor) == visited.end())
+				if (dfs_connection_(neiNeighbor, index, &visited))
+					return true;
+		}
+	}
+
+	return false;
 }
 
-bool Graph::dfs_findValue_(Vertex* source, int value, std::set<Vertex*>* visited)
+bool Graph::dfs_hasCicle(int index)
 {
-	if (source->value == value)
-		return true;
+	si visited;
 
-	visited->insert(source);
-
-	std::vector<Edge*>::iterator edge = source->neighbors.begin();
-	for (; edge != source->neighbors.end(); edge++)
+	vii::iterator edge = V[index]->begin();
+	for (; edge != V[index]->end(); edge++)
 	{
-		if (visited->find((*edge)->to) == visited->end())
-			if (dfs_findValue_((*edge)->to, value, visited))
-				return true;
+		int neighbor = edge->first;
+		visited.insert(neighbor);
+
+		vii::iterator neiEdge = V[neighbor]->begin();
+		for (; neiEdge != V[neighbor]->end(); neiEdge++)
+		{
+			int neiNeighbor = neiEdge->first;
+
+			if (neiNeighbor != index && visited.find(neiNeighbor) == visited.end())
+				if (dfs_connection_(neiNeighbor, index, &visited))
+					return true;
+		}
 	}
 
 	return false;

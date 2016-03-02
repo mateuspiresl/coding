@@ -8,7 +8,7 @@ int main()
 	std::cout << "Size: ";
 	int n; std::cin >> n;
 	for (int i = 0; i < n; i++)
-		graph.insert(new Vertex(i));
+		graph.insert(new vii);
 
 	std::cout << "Connections: ";
 	int c; std::cin >> c;
@@ -27,17 +27,17 @@ int main()
 		int from, find;
 		std::cin >> from >> find;
 		
-		std::cout << (graph.dfs_findVertex(graph.at(from), graph.at(find)) ? "found" : "not") << std::endl;
+		std::cout << (graph.dfs_findVertex(from, find) ? "found" : "not") << std::endl;
 	}
 
-	std::cout << "Find value: ";
-	int v; std::cin >> v;
-	while (v--)
+	std::cout << "Find cicle: ";
+	int t; std::cin >> t;
+	while (t--)
 	{
-		int from, value;
-		std::cin >> from >> value;
+		int from;
+		std::cin >> from;
 
-		std::cout << (graph.dfs_findValue(graph.at(from), value) ? "found" : "not") << std::endl;
+		std::cout << (graph.dfs_findCicle(from) ? "has" : "has not") << std::endl;
 	}
 
 	return 0; 

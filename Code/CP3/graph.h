@@ -4,25 +4,25 @@
 #include <vector>
 #include <set>
 
-#include "vertex.h"
+typedef std::pair<int, int> ii;
+typedef std::vector<ii> vii;
+typedef std::set<int> si;
 
 class Graph {
 
-	std::vector<Vertex*> V;
+	std::vector<vii*> V;
 
-	bool dfs_findVertex_(Vertex* source, Vertex* vertex, std::set<Vertex*>* visited);
-	bool dfs_findValue_(Vertex* source, int value, std::set<Vertex*>* visited);
+	bool dfs_connection_(int source, int target, si* visited);
 
 public:
-	int insert(Vertex* vertex);
-	Vertex* at(int index);
-	int indexOf(Vertex* vertex);
-
-	void direct(int from, int to, int weight);
+	int insert(vii* vertex);
+	vii* at(int index);
+	
+	void direct(int source, int target, int weight);
 	void connect(int a, int b, int weight);
 
-	bool dfs_findVertex(Vertex* source, Vertex* vertex);
-	bool dfs_findValue(Vertex* source, int value);
+	bool dfs_connection(int source, int target);
+	bool dfs_insideCicle(int index);
 
 };
 
