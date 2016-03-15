@@ -1,0 +1,1 @@
+glVertex{234}{sifd}(x,y,z);

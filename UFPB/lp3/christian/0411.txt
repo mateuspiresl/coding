@@ -1,0 +1,64 @@
+alloca
+	Alocado na pilha
+	Não faz parte da especificação do C
+		Extensão do GNU
+	Tem limite de tamanho (da pilha)
+	Forçar inline
+		__attribute__((always_inline))
+		Deve ser compilado com flag de otimização
+
+Execute and echo return value
+	$ ./exe; echo $?
+
+GCC
+	-Wall
+		Mostra todos os warning
+		Gera executável
+	-Werror
+		Trata os warnings como errors
+		Não gera executável se houver
+	-pedantic
+		Não gera executável se houver qualquer código fora do padrão
+		Ex. padrão: c99, c11
+
+Building
+	Código-fonte
+		*.c
+	1. Preprocessor
+		Checa as diretivas e elimina-as gerando um código, que é a unidade de tradução
+		Command
+			$ gcc -E code.c > code.i
+		Gera *.i
+	2. Compiler
+		Transforma a unidade de tradução em assembly
+		Command
+			$ gcc -S code.i
+		Gera *.s
+	3. Assembler (não está no GCC)
+		Traduz o código assembly
+		Command
+			$ as
+			$ gcc -c code.s
+		Gera *.o
+	4. Linker (não está no GCC)
+		Gera o executável
+		Command
+			$ ld
+			$ gcc code.o -o code
+			$ gcc code.o code2.o -o code
+
+Tabela de simbolos
+	Gerado pelo compilador no momento da compilação
+	Tabela com todas as variável, nomes de função, ... para endereços de memória
+
+Commands
+	nm
+		Lista de simbolos em um arquivo objeto (*.o)
+	objdump
+		Inspeciona arquivo objeto (*.o)
+		l: local symbols
+		g: global symbols
+		d: debug symbols
+		f: file
+		O: object
+		F: function
