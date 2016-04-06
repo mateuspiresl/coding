@@ -1,0 +1,15 @@
+A câmera está sempre na origem e apontando para o z negativo
+
+Projeções
+	Paralela
+		Centro de posição no infinito
+		Objetos de mesmo tamanho ocupam mesmo espaço na projeção
+
+		Tipos
+			Oblíqua
+				Direção da projeção e normal do plano não são os mesmo.
+		
+	Perspectiva
+		Centro de projeção definido
+		Objetos próximos são maiores que os distantes de mesmo tamanho
+

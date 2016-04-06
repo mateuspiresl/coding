@@ -6,7 +6,10 @@
 
 void display();
 void keyEventHandler(unsigned char key, int x, int y);
-void drawCube();
+
+// struct QuadFaceNode;
+// QuadFaceNode* readCube(char* filename);
+// void drawCube(QuadFaceNode* node);
 
 int moveHor = 0;
 int moveVer = 0;
@@ -14,7 +17,7 @@ int moveVer = 0;
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(600, 600);
 
 	int windowID = glutCreateWindow("OPENGL");
@@ -66,12 +69,12 @@ void display()
 	glRotated(moveHor * 10, 0, 1, 0);
     glRotated(moveVer * 10, 1, 0, 0);
 	glPushMatrix();
-
+	
     drawCube(readCube("cubo.obj"));
 
     // Reset movement
     moveHor = 0;
     moveVer = 0;
 
-	glFlush();
+	glutSwapBuffers();
 }

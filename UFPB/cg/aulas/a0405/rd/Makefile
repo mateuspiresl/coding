@@ -1,12 +1,16 @@
-solar: solar.c
-	gcc solar.c -o solar -lopengl32 -lglu32 -lfreeglut
+point3d: point3d.c
+	gcc -c point3d.c
 
-reader: reader.c
+quadface: point3d quadface.c
+	gcc -c quadface.c
+
+reader: quadface reader.c
 	gcc -c reader.c
 
 readraw: reader readraw.c
 	gcc -c readraw.c
-	gcc reader.o readraw.o -o readraw -lopengl32 -lglu32 -lfreeglut
+	gcc point3d.o quadface.o reader.o readraw.o -o readraw -lopengl32 -lglu32 -lfreeglut
+
 
 gdbreader: reader.c
 	gcc -c reader.c -g3
