@@ -1,0 +1,55 @@
+Adicionando 10, 100, 21 e 76:
+Linked List
+	Size: 4
+	Elements:
+		0: 10, 1: 100, 2: 21, 3: 76, 
+Consultando valor na posição 2: 21
+Removendo elemento na posição 1: 1
+Linked List
+	Size: 3
+	Elements:
+		0: 10, 1: 21, 2: 76, 
+Removendo elemento com valor 76: 2
+Linked List
+	Size: 2
+	Elements:
+		0: 10, 1: 21, 
+Adicionando 100:
+Linked List
+	Size: 3
+	Elements:
+		0: 10, 1: 21, 2: 100, 
+Removendo elemento na posição 0: 1
+Linked List
+	Size: 2
+	Elements:
+		0: 21, 1: 100, 
+Alterando valor para 430 na posição 1: 1
+Linked List
+	Size: 2
+	Elements:
+		0: 21, 1: 430, 
+Adicionando 10, 100, 21 e 76:
+Linked List
+	Size: 6
+	Elements:
+		0: 21, 1: 430, 2: 10, 3: 100, 4: 21, 5: 76, 
+Partindo a lista em duas:
+Linked List
+	Size: 3
+	Elements:
+		0: 21, 1: 10, 2: 21, 
+Linked List
+	Size: 3
+	Elements:
+		0: 430, 1: 100, 2: 76, 
+Juntando as duas listas:
+Linked List
+	Size: 6
+	Elements:
+		0: 21, 1: 10, 2: 21, 3: 430, 4: 100, 5: 76, 
+Inserindo 444 na posição 0 e 555 na posição 5:
+Linked List
+	Size: 8
+	Elements:
+		0: 444, 1: 21, 2: 10, 3: 21, 4: 430, 5: 555, 6: 100, 7: 76, 
