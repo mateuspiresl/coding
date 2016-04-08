@@ -1,0 +1,9 @@
+Linkage
+	External Linkage
+		Using variable / function declared outside the current translation unit
+	Internal linkage
+		Defined inside the current translation unit
+		static: cannot be linked from outside
+			Variables with the same name declared static in differente files can be compiled
+		nm
+			d (lower case): cannot be linked from outside
