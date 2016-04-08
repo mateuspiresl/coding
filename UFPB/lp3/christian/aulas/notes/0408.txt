@@ -7,3 +7,9 @@ Linkage
 			Variables with the same name declared static in differente files can be compiled
 		nm
 			d (lower case): cannot be linked from outside
+
+Macros
+	Defining pattern
+		#define my_macro do { /
+			printf("my_macro\n"); /
+		} while (0)
