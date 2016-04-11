@@ -1,1 +1,2 @@
 gcc -o test test.c -lglut -lGL -lGLU
+gcc -g code.c -lopengl32 -lglu32 -lfreeglut
