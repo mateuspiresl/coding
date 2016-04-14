@@ -91,7 +91,7 @@ void display()
 
 		// Sun
 		glColor3d(1, 0.8, 0);
-		glutWireSphere(10, 28, 16);
+		glutSolidSphere(10, 28, 16);
 	glPopMatrix();
 
 	// Earth rotation and distance relative to the sun
@@ -105,8 +105,9 @@ void display()
 		glRotated(rotX * 0.002, 0, 0, 1);
 
 		// Earth
+		// glColorMask(0, 1, 0, 0);
 		glColor3d(0, 0.2, 0.6);
-		glutWireSphere(4, 20, 10);
+		glutSolidSphere(4, 20, 10);
 	glPopMatrix();
 
 	// Moon rotation and distance relative to the earth
@@ -114,8 +115,9 @@ void display()
 	glTranslated(6, 0, 0);
 
 	// Moon
+	// glColorMask(1, 1, 1, 0);
 	glColor3d(0.7, 0.7, 0.7);
-	glutWireSphere(1, 14, 10);
+	glutSolidSphere(1, 14, 10);
 
 	glutSwapBuffers();
 }

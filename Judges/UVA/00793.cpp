@@ -1,7 +1,7 @@
-#include <stdlib.h>
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -14,6 +14,7 @@ typedef struct {
 DisjointSets* dj_create(int n)
 {
 	DisjointSets* dj = new DisjointSets;
+	n++;
 
 	dj->p.assign(n, 0);
 	dj->rank.assign(n, 0);
@@ -22,8 +23,12 @@ DisjointSets* dj_create(int n)
 		dj->p[i] = i;
 }
 
-int dj_findSet(DisjointSets* dj, int i) {
-	return dj->p[i] == i ? i : (dj->p[i] = dj_findSet(dj, dj->p[i]));
+int dj_findSet(DisjointSets* dj, int i)
+{
+	if (dj->p[i] == i) return i;
+
+	dj->p[i] = dj_findSet(dj, dj->p[i]);
+	return dj->p[i];
 }
 
 bool dj_isSameSet(DisjointSets* dj, int i, int j) {
@@ -64,21 +69,27 @@ int main()
 
 		while ( ! cin.eof())
 		{
-			stringstream ss;
-			cin >> ss;
+			string in;
+			cin >> in;
+
+			if (in[0] >= '0' && in[0] <= '9')
+			{
+				istringstream iss(in);
+				iss >> numComp;
+				break;
+			}
+
+			int a, b;
+			cin >> a >> b;
 
 			if (in[0] == 'c')
-			{
-				int a, b;
-				ss >> a >> b;
-				dj_unionSet(a, b);
-			}
-			else if (in[0] == 'q')
-			{
-				int a, b;
-				ss >> a >> b;
-
-			}
+				dj_unionSet(dj, a, b);
+			else
+				success[dj_isSameSet(dj, a, b)]++;
 		}
+
+		cout << success[1] << "," << success[0] << endl;
 	}
+
+	return 0;
 }
