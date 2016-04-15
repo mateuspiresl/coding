@@ -13,8 +13,10 @@ Node* createList() {
 	return malloc(sizeof(_Node*) * 27);
 }
 
-Node* createNode() {
+Node* createNode(char c) {
 	Node* node = malloc(sizeof(Node));
+	node->c = c;
+	node->end = 0;
 	node->list = createList();
 	for (int i = 0; i < 27; i++)
 		node->list[i] = NULL;
@@ -30,10 +32,12 @@ int main()
 	int n;
 	cin >> n;
 
-	Letter* root = createNode();
+	Letter* root = createNode(0);
 
 	while (n != -1)
 	{
+		vector<int> lens;
+
 		for (int i = 0; i < n; i++)
 		{
 			string name;
@@ -41,6 +45,7 @@ int main()
 
 			Node node = root;
 			int length = name.length();
+			lens.push(length);
 
 			for (int i = 0; i < length; i++)
 			{
@@ -48,17 +53,18 @@ int main()
 
 				if (curr == NULL)
 				{
-					curr = createNode();
-					curr->a = name[i];
-					curr->end = 0x1;
+					curr = createNode(name[i]);
+					curr->end |= ONE;
 				}
 
 				node->list[i] = curr;
 			}
 
-			node->list[length - 1]->end |= 0x2;
+			node->list[length - 1]->end |= ONE_END;
 		}
 
+		sort(lens.begin(), lens.end());
+
 		for (int i = 0; i < n; i++)
 		{
 			string name;
@@ -66,7 +72,6 @@ int main()
 
 			Node node = root;
 			int length = name.length();
-			int size = 0;
 
 			for (int i = 0; i < length; i++)
 			{
@@ -74,25 +79,26 @@ int main()
 
 				if (curr == NULL)
 				{
-					curr = createNode();
-					curr->a = name[i];
-					curr->end = 2;
+					if (i == 0)
+					{
+						curr = createNode(name[i]);
+						curr->end |= TWO;
+					}
+					else
+					{
+						node->end |= TWO;
+						ans += 
+					}
 				}
-				else
+				else if (i == length - 1)
 				{
-					if (curr->end == 1)
-						curr->end = 3;
 
-					else if (curr->end == -1)
-						curr->end = -3;
-
-					size++;
 				}
 
 				node->list[i] = curr;
 			}
 
-			node->list[length - 1]->end = -1;
+			node->list[length - 1]->end |= TWO_END;
 		}
 
 		cin >> n;
