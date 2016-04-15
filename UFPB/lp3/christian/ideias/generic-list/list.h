@@ -19,6 +19,7 @@ void l_setComparator(List* list, int (*comparatorFunc)(void*, void*));
 Element* l_createElement(void* value, Element* next);
 void l_add(List* list, void* value);
 void l_removeValue(List* list, void* value);
+void l_removeIndex(List* list, int index);
 void* l_get(List* list, int index);
 
 #endif

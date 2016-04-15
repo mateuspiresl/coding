@@ -15,6 +15,14 @@ void l_setComparator(List* list, int (*comparatorFunc)(void*, void*)) {
 	list->comparator = comparatorFunc;
 }
 
+int l_compare(List* list, void* a, void* b)
+{
+	if (list->comparator == NULL)
+		return (int) a - (int) b;
+	else
+		return (*(list->comparator))(a, b);
+}
+
 Element* l_createElement(void* value, Element* next)
 {
 	Element* e = malloc(sizeof(Element));
@@ -62,6 +70,29 @@ void l_removeValue(List* list, void* value)
 
 		previous = e;
 		e = e->next;
+	}
+}
+
+void l_removeIndex(List* list, int index)
+{
+	Element* e = list->head;
+	Element* previous = NULL;
+
+	while (index-- && e != NULL)
+	{
+		previous = e;
+		e = e->next;
+	}
+
+	if (e != NULL)
+	{
+		if (previous == NULL)
+			list->head = e->next;
+		else
+			previous->next = e->next;
+
+		list->size--;
+		free(e);
 	}
 }
 

@@ -35,6 +35,10 @@ void li_removeValue(List* list, int value)
 	free(v);
 }
 
+void li_removeIndex(List* list, int index) {
+	l_removeIndex(list, index);
+}
+
 int li_get(List* list, int index)
 {
 	void* value = l_get(list, index);
