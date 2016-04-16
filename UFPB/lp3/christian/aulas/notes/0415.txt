@@ -1,0 +1,16 @@
+const type
+	Variável constante
+	Pode haver otimizações pelo compilador
+	Indica read-only
+	O compilador pode fazer inline da variável
+	Pode ser modificada por outros programas, mas não o próprio
+const type* (or type const*)
+	Ponteiro para variável constante
+type *const
+	Ponteiro constante para uma variável
+const type *const
+	Ponteiro constante para variável constante
+
+volatile
+	Impede que o compilador otimize
+		Impede fazer inline em variável const
