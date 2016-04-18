@@ -24,10 +24,10 @@ int lq_size(const LinkedQueue q);
 int lq_front(const LinkedQueue q, int* mem);
 
 /* Insere um elemento no final da fila. */
-void lq_push(LinkedQueue q, int value);
+void lq_enqueue(LinkedQueue q, int value);
 
 /* Remove o primeiro elemento da fila. */
-int lq_pop(LinkedQueue q);
+int lq_dequeue(LinkedQueue q);
 
 
 // Novas funcionalidades

@@ -8,10 +8,10 @@ int main()
 	printf("Fila está vazia? %s\n", lq_isEmpty(q) ? "Sim." : "Não.");
 
 	printf("Enfileirando 17.\n");
-	lq_push(q, 17);
+	lq_enqueue(q, 17);
 
 	printf("Enfileirando 41.\n");
-	lq_push(q, 41);
+	lq_enqueue(q, 41);
 
 	printf("Fila está vazia? %s\n", lq_isEmpty(q) ? "Sim." : "Não.");
 	printf("Tamanho da fila: %d\n", lq_size(q));
@@ -19,17 +19,17 @@ int main()
 	printf("Frente da fila: %d\n", value);
 
 	printf("Enfileirando 25.\n");
-	lq_push(q, 25);
+	lq_enqueue(q, 25);
 
 	printf("Detalhes da fila:\n");
 	lq_details(q);
 
 	printf("Desenfileirando 17.\n");
-	lq_pop(q);
+	lq_dequeue(q);
 
 	printf("Enfileirando 10 e 41.\n");
-	lq_push(q, 10);
-	lq_push(q, 41);
+	lq_enqueue(q, 10);
+	lq_enqueue(q, 41);
 
 	printf("Detalhes da fila 1:\n");
 	lq_details(q);
@@ -38,10 +38,10 @@ int main()
 
 	printf("Criando fila 2 com elementos de valor 0, 41, 25 e 10.\n");
 	LinkedQueue q2 = lq_create(10);
-	lq_push(q2, 0);
-	lq_push(q2, 41);
-	lq_push(q2, 25);
-	lq_push(q2, 10);
+	lq_enqueue(q2, 0);
+	lq_enqueue(q2, 41);
+	lq_enqueue(q2, 25);
+	lq_enqueue(q2, 10);
 
 	printf("\nDetalhes da fila 1:\n");
 	lq_details(q);
@@ -63,13 +63,13 @@ int main()
 
 	printf("\nTamanho da fila 3: %d.\n", lq_size(q3));
 	printf("Adicionando 5 no final da fila 3.\n");
-	lq_push(q3, 5);
+	lq_enqueue(q3, 5);
 	printf("Tamanho da fila 3: %d.\n", lq_size(q3));
 	printf("Adicionando 5 no final da fila 3.\n");
-	lq_push(q3, 5);
+	lq_enqueue(q3, 5);
 	printf("Tamanho da fila 3: %d.\n", lq_size(q3));
 	printf("Adicionando 5 no final da fila 3.\n");
-	lq_push(q3, 5);
+	lq_enqueue(q3, 5);
 	printf("Tamanho da fila 3: %d.\n", lq_size(q3));
 	printf("Detalhes da fila 3:\n");
 	lq_details(q3);

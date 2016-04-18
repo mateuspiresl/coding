@@ -26,10 +26,10 @@ int sq_size(const SeqQueue q);
 int sq_front(const SeqQueue q, int* mem);
 
 /* Insere um elemento no final da fila. */
-int sq_push(SeqQueue q, int value);
+int sq_enqueue(SeqQueue q, int value);
 
 /* Remove o primeiro elemento da fila. */
-int sq_pop(SeqQueue q);
+int sq_dequeue(SeqQueue q);
 
 
 // Novas funcionalidades

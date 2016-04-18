@@ -39,7 +39,7 @@ int sq_front(const SeqQueue q, int* mem)
 	return 1;
 }
 
-int sq_push(SeqQueue q, int value)
+int sq_enqueue(SeqQueue q, int value)
 {
 	if (q->size == q->maxSize) return 0;
 
@@ -48,7 +48,7 @@ int sq_push(SeqQueue q, int value)
 	return 1;
 }
 
-int sq_pop(SeqQueue q)
+int sq_dequeue(SeqQueue q)
 {
 	if (q->size == 0) return 0;
 
@@ -102,8 +102,8 @@ int sq_interc(const SeqQueue fromA, const SeqQueue fromB, SeqQueue to)
 	int i;
 	for (i = 0; i < fromA->size; i++)
 	{
-		sq_push(to, fromA->data[sq_at(fromA, i)]);
-		sq_push(to, fromB->data[sq_at(fromB, i)]);
+		sq_enqueue(to, fromA->data[sq_at(fromA, i)]);
+		sq_enqueue(to, fromB->data[sq_at(fromB, i)]);
 	}
 
 	return 1;
@@ -113,5 +113,5 @@ void sq_reverse(const SeqQueue q, SeqQueue reversed)
 {
 	int i;
 	for (i = sq_size(q) - 1; i >= 0; i--)
-		sq_push(reversed, q->data[sq_at(q, i)]);
+		sq_enqueue(reversed, q->data[sq_at(q, i)]);
 }

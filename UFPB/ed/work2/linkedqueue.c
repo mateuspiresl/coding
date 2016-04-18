@@ -35,7 +35,7 @@ int lq_front(const LinkedQueue q, int* mem)
 	return 1;
 }
 
-void lq_push(LinkedQueue q, int value)
+void lq_enqueue(LinkedQueue q, int value)
 {
 	lq_Element e = lq_createElement(value, NULL);
 
@@ -48,7 +48,7 @@ void lq_push(LinkedQueue q, int value)
 	q->size++;
 }
 
-int lq_pop(LinkedQueue q)
+int lq_dequeue(LinkedQueue q)
 {
 	if (q->size == 0) return 0;
 
@@ -115,8 +115,8 @@ int lq_interc(const LinkedQueue fromA, const LinkedQueue fromB, LinkedQueue to)
 
 	while (eA != NULL)
 	{
-		lq_push(to, eA->value);
-		lq_push(to, eB->value);
+		lq_enqueue(to, eA->value);
+		lq_enqueue(to, eB->value);
 
 		eA = eA->next;
 		eB = eB->next;
@@ -125,16 +125,16 @@ int lq_interc(const LinkedQueue fromA, const LinkedQueue fromB, LinkedQueue to)
 	return 1;
 }
 
-void lq_pushReversed(LinkedQueue reversed, lq_Element from)
+void lq_enqueueReversed(LinkedQueue reversed, lq_Element from)
 {
 	if (from->next != NULL)
-		lq_pushReversed(reversed, from->next);
+		lq_enqueueReversed(reversed, from->next);
 
-	lq_push(reversed, from->value);
+	lq_enqueue(reversed, from->value);
 }
 
 void lq_reverse(const LinkedQueue q, LinkedQueue reversed)
 {
 	if (lq_isEmpty(q)) return;
-	lq_pushReversed(reversed, q->first);
+	lq_enqueueReversed(reversed, q->first);
 }
