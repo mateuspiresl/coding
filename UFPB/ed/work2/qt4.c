@@ -1,4 +1,6 @@
+#include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include "linkedstack.h"
 
 const int MAX = 300;
@@ -7,15 +9,16 @@ int main()
 {
 	char str[MAX];
 	fgets(str, MAX, stdin);
+	str[MAX - 1] = '\0';
 
-	LinkedStack left = ls_createLinkedStack();
+	LinkedStack left = ls_create();
 
 	int i;
-	for (i = 0; i < MAX - 1 && str[i] != '\0'; i++)
+	for (i = 0; str[i] != '\0'; i++)
 		if (isalpha(str[i]) || isdigit(str[i]))
-			ls_push(s, str[í]);
+			ls_push(left, str[i]);
 
-	LinkedStack right = ls_createLinkedStack();
+	LinkedStack right = ls_create();
 
 	while (ls_size(left) > ls_size(right))
 	{
@@ -27,26 +30,12 @@ int main()
 	if (ls_size(right) > ls_size(left))
 		ls_pop(right);
 
-	while ( ! ls_isEmpty(left))
-	{
-		int vl, vr;
-		ls_top(left, &vl);
-		ls_top(right, &vr);
-
-		if (left != right)
-		{
-			printf("Não são palindromes.\n");
-			break;
-		}
-
-		ls_pop(left);
-		ls_pop(right);
-	}
-
-	if (ls_isEmpty(left))
-		printf("São palindromes.\n");
-
-	ls_clear(s);
-	free(s);
+	if (ls_equals(left, right))
+		printf("É palindrome.\n");
+	else
+		printf("Não é palindrome.\n");
+	
+	ls_destroy(left);
+	ls_destroy(right);
 	return 0;
 }

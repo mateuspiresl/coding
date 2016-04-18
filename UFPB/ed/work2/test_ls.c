@@ -3,7 +3,7 @@
 
 int main()
 {
-	LinkedStack s = ls_createLinkedStack(10);
+	LinkedStack s = ls_create(10);
 
 	printf("Pilha está vazia? %s\n", ls_isEmpty(s) ? "Sim." : "Não.");
 
@@ -42,7 +42,7 @@ int main()
 	ls_details(s);
 
 	printf("Criando pilha 2 e empilhando 10.\n");
-	LinkedStack s2 = ls_createLinkedStack(8);
+	LinkedStack s2 = ls_create(8);
 	ls_push(s2, 10);
 
 	printf("Detalhes da pilha 2:\n");

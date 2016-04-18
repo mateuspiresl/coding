@@ -3,7 +3,7 @@
 
 int main()
 {
-	LinkedStack s = ls_createLinkedStack();
+	LinkedStack s = ls_create();
 
 	int invalid = 0;
 

@@ -1,18 +1,9 @@
 #include <stdio.h>
 #include "seqstack.h"
 
-void ver(SeqStack s)
-{
-	printf("isEmpty == %d\n", ss_isEmpty(s));
-	printf("size == %d\n", ss_size(s));
-	int v;
-	int r = ss_top(s, &v);
-	printf("top(%d) == %d\n", r, v);
-}
-
 int main()
 {
-	SeqStack s = ss_createSeqStack(10);
+	SeqStack s = ss_create(10);
 
 	printf("Pilha está vazia? %s\n", ss_isEmpty(s) ? "Sim." : "Não.");
 
@@ -52,7 +43,7 @@ int main()
 	ss_details(s);
 
 	printf("Criando pilha 2 e empilhando 10.\n");
-	SeqStack s2 = ss_createSeqStack(8);
+	SeqStack s2 = ss_create(8);
 	ss_push(s2, 10);
 
 	printf("Detalhes da pilha 2:\n");

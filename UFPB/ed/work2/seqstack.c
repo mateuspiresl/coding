@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "seqstack.h"
 
-SeqStack ss_createSeqStack(int maxSize)
+SeqStack ss_create(int maxSize)
 {
 	SeqStack s = malloc(sizeof(struct _SeqStack));
 	s->data = malloc(sizeof(int) * maxSize);

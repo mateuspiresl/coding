@@ -1,20 +1,20 @@
 #ifndef LINKED_STACK_H_
 #define LINKED_STACK_H_
 
-struct _Element {
+struct _ls_Element {
 	int value;
-	struct _Element* next;
+	struct _ls_Element* next;
 };
-typedef struct _Element* Element;
+typedef struct _ls_Element* ls_Element;
 
 struct _LinkedStack {
-	Element top;
+	ls_Element top;
 	int size;
 };
 typedef struct _LinkedStack* LinkedStack;
 
 /* Cria uma pilha e define. */
-LinkedStack ls_createLinkedStack();
+LinkedStack ls_create();
 
 /* Verifica se a pilha está vazia. */
 int ls_isEmpty(LinkedStack s);
@@ -33,7 +33,7 @@ int ls_pop(LinkedStack s);
 
 // New methods
 
-/* Escreve os detalhes da pilha no stdio. */
+/* Escreve os detalhes da pilha. */
 void ls_details(LinkedStack s);
 
 /* Inverte a pilha. */
@@ -47,5 +47,8 @@ int ls_equals(LinkedStack a, LinkedStack b);
 
 /* Remove todos os elementos da pilha. */
 void ls_clear(LinkedStack s);
+
+/* Libera toda a memória utilizada pela pilha, apagando a pilha. */
+void ls_destroy(LinkedStack s);
 
 #endif

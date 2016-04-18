@@ -1,0 +1,45 @@
+Pilha está vazia? Sim.
+Empilhando 17.
+Empilhando 41.
+Pilha está vazia? Não.
+Pilha está cheia? Não.
+Tamanho da pilha: 2
+Topo da pilha: 41
+Empilhando 25.
+Detalhes da pilha:
+SeqStack:
+	Size: 3
+	Elements: 17 41 25 
+Desempilhando 25.
+Empilhando 10 e 41.
+SeqStack:
+	Size: 4
+	Elements: 17 41 10 41 
+Invertendo pilha.
+SeqStack:
+	Size: 4
+	Elements: 41 10 41 17 
+Removendo todos os valores 41.
+SeqStack:
+	Size: 2
+	Elements: 10 17 
+Criando pilha 2 e empilhando 10.
+Detalhes da pilha 2:
+SeqStack:
+	Size: 1
+	Elements: 10 
+Pilha 1 e 2 são iguais? Não.
+Empilhando 17.
+Detalhes da pilha 1:
+SeqStack:
+	Size: 2
+	Elements: 10 17 
+Detalhes da pilha 2:
+SeqStack:
+	Size: 2
+	Elements: 10 17 
+Pilha 1 e 2 são iguais? Sim.
+Esvaziando pilha 2.
+Detalhes da pilha 2:
+SeqStack:
+	Size: 0

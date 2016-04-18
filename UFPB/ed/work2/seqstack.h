@@ -9,7 +9,7 @@ struct _SeqStack {
 typedef struct _SeqStack* SeqStack;
 
 /* Cria uma pilha e define. */
-SeqStack ss_createSeqStack(int maxSize);
+SeqStack ss_create(int maxSize);
 
 /* Verifica se a pilha está vazia. */
 int ss_isEmpty(SeqStack s);
@@ -31,7 +31,7 @@ int ss_pop(SeqStack s);
 
 // New methods
 
-/* Escreve os detalhes da pilha no stdio. */
+/* Escreve os detalhes da pilha. */
 void ss_details(SeqStack s);
 
 /* Inverte a pilha. */
