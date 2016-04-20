@@ -10,8 +10,8 @@ void display();
 void keyEventHandler(unsigned char key, int x, int y);
 void gameLoop();
 
-int p = 1;
-int d = 1;
+int p = 0;
+int d = 0;
 int rotX = 0;
 int rands[STARS];
 
@@ -51,11 +51,12 @@ void keyEventHandler(unsigned char key, int x, int y)
 	}
 
 	glutPostRedisplay();
-} 
+}
 
 void display()
 {
 	if (d) glEnable(GL_DEPTH_TEST);
+	
 	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 	
