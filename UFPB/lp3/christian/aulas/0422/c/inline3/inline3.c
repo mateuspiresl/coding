@@ -1,4 +1,4 @@
-inline void InsertionSort(int *v, int size);
+#include "insertion.h"
 
 int y[5] = { 5, 4, 3, 2, 1 };
 
