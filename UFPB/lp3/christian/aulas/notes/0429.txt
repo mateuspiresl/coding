@@ -1,0 +1,7 @@
+Contrutor
+	É mais caro construír um objeto
+
+	Listas de inicialização
+
+multable
+	Permite que membros declarados const possam ser modificados dentro de fuñções const
