@@ -1,75 +1,103 @@
 #include "drawing.h"
 #include <GL/glut.h>
 
-void draw_cube(float x, float y, float z, int len)
+void draw_cube(float size)
 {
-	// FRENTE
-	glBegin(GL_POLYGON);
-		glVertex3d(x, y + len, z + len);
-		glVertex3d(x, y, z + len);
-		glVertex3d(x + len, y, z + len);
-		glVertex3d(x + len, y + len, z + len);
-	glEnd();
-
 	// TRASEIRA
 	glBegin(GL_POLYGON);
-		glVertex3d(x, y + len, z);
-		glVertex3d(x, y, z);
-		glVertex3d(x + len, y, z);
-		glVertex3d(x + len, y + len, z);
+		glVertex3f(0, size, size);
+		glVertex3f(0, 0, size);
+		glVertex3f(size, 0, size);
+		glVertex3f(size, size, size);
 	glEnd();
 
-	// DIREITA
+	// FRENTE
 	glBegin(GL_POLYGON);
-		glVertex3d(x, y + len, z + len);
-		glVertex3d(x, y, z + len);
-		glVertex3d(x, y, z);
-		glVertex3d(x, y + len, z);
+		glVertex3f(0, size, 0);
+		glVertex3f(0, 0, 0);
+		glVertex3f(size, 0, 0);
+		glVertex3f(size, size, 0);
 	glEnd();
 
 	// ESQUERDA
 	glBegin(GL_POLYGON);
-		glVertex3d(x + len, y + len, z);
-		glVertex3d(x + len, y, z);
-		glVertex3d(x + len, y, z + len);
-		glVertex3d(x + len, y + len, z + len);
+		glVertex3f(0, size, size);
+		glVertex3f(0, 0, size);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, size, 0);
 	glEnd();
 
-	// TOPO
+	// DIREITA
 	glBegin(GL_POLYGON);
-		glVertex3d(x, y, z);
-		glVertex3d(x, y, z + len);
-		glVertex3d(x + len, y, z + len);
-		glVertex3d(x + len, y, z);
+		glVertex3f(size, size, 0);
+		glVertex3f(size, 0, 0);
+		glVertex3f(size, 0, size);
+		glVertex3f(size, size, size);
 	glEnd();
 
 	// BASE
 	glBegin(GL_POLYGON);
-		glVertex3d(x, y + len, z + len);
-		glVertex3d(x, y + len, z);
-		glVertex3d(x + len, y + len, z);
-		glVertex3d(x + len, y + len, z + len);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, 0, size);
+		glVertex3f(size, 0, size);
+		glVertex3f(size, 0, 0);
+	glEnd();
+
+	// TOPO
+	glBegin(GL_POLYGON);
+		glVertex3f(0, size, size);
+		glVertex3f(0, size, 0);
+		glVertex3f(size, size, 0);
+		glVertex3f(size, size, size);
 	glEnd();
 }
 
-void draw_putLight(float x, float y, float z)
+void draw_triangle(float base, float size)
 {
-	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat mat_shininess[] = { 150.0 };
-	GLfloat light_position[] = { x, y, z, 1.0 };
-	GLfloat white_light[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat lmodel_ambient[] = { 0.1, 0.1, 0.1, 0.1 };
+	glBegin(GL_TRIANGLES);
+		glColor3f(0.66, 0, 0.33);
+		glVertex3f(0, 0, 0);
+		glVertex3f(base, 0, 0);
+		glVertex3f(base, 0, base);
+		
+		glColor3f(0.33, 0, 0.66);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, 0, base);
+		glVertex3f(base, 0, base);
 
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glShadeModel(GL_SMOOTH);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, white_light);
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+		glColor3f(0.17, 0.33, 0.50);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, 0, base);
+		glVertex3f(base / 2, size, base / 2);
 
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	glEnable(GL_DEPTH_TEST);
+		glColor3f(0.50, 0.33, 0.17);
+		glVertex3f(0, 0, 0);
+		glVertex3f(base, 0, 0);
+		glVertex3f(base / 2, size, base / 2);
+		
+		glColor3f(0.50, 0.33, 0.83);
+		glVertex3f(0, 0, base);
+		glVertex3f(base, 0, base);
+		glVertex3f(base / 2, size, base / 2);
+		
+		glColor3f(0.83, 0.33, 0.50);
+		glVertex3f(base, 0, 0);
+		glVertex3f(base, 0, base);
+		glVertex3f(base / 2, size, base / 2);
+	glEnd();
+}
+
+void draw_rect(int size, int precision)
+{
+	for (int x = 0; x < size; x += precision) {
+		for (int z = 0; z > -size; z -= precision)
+		{
+			glBegin(GL_POLYGON);
+				glVertex3d(x, 0, z);
+				glVertex3d(x + precision, 0, z);
+				glVertex3d(x + precision, 0, z + precision);
+				glVertex3d(x, 0, z + precision);
+			glEnd();
+		}
+	}
 }

@@ -1,0 +1,18 @@
+ZERO ONE TWO THREE FOUR FIVE SIX SEVEN EIGHT NINE
+
+n(Z) = n(ZERO)
+n(W) = n(TWO)
+n(U) = n(FOUR)
+n(X) = n(SIX)
+n(G) = n(EIGHT)
+
+ONE THREE FIVE SEVEN NINE
+
+n(O) = n(ONE)
+n(T) = n(THREE)
+n(F) = n(FIVE)
+n(S) = n(SEVEN)
+
+NINE
+
+n(N) = n(NINE)

@@ -1,33 +1,49 @@
 #include "player.h"
 #include <GL/glut.h>
 
-const float JUMP_ACC = 10;
+const float PLAYER_JUMP = -100;
 
 Player player;
 
 void player_init(float x, float y, float z)
 {
-	player.x = x;
-	player.y = y;
-	player.z = z;
+	player.position.x = x;
+	player.position.y = y;
+	player.position.z = z;
 
-	player.zAcc = 0;
+	player.orientation.x = 0;
+	player.orientation.y = 0;
+	player.orientation.z = 0;
+
+	player.acc = 0;
 }
+
+int lastX = -1, lastY = -1;
 
 void player_keyEventHandler(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-		case 'w':   player.y++;
+		case 'w':   player.position.z++;
 					break;
-		case 'a':   player.x--;
+		case 's':	player.position.z--;
 					break;
-		case 's':	player.y--;
+		case 'a':   player.position.x++;
 					break;
-		case 'd':	player.x++;
+		case 'd':	player.position.x--;
 					break;
-		case 'b':	player.zAcc = JUMP_ACC;
+		case 'b':	player.position.y = PLAYER_JUMP;
+					player.acc = 1;
 	}
+
+	if (lastX != -1 && lastY != -1)
+	{
+		player.orientation.x += x - lastX;
+		player.orientation.y += y - lastY;
+	}
+
+	lastX = x;
+	lastY = y;
 
 	glutPostRedisplay();
 }

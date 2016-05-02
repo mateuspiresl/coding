@@ -3,7 +3,12 @@
 
 typedef struct {
 	float x, y, z;
-	float zAcc;
+} PointF;
+
+typedef struct {
+	PointF position;
+	PointF orientation;
+	float acc;
 } Player;
 
 void player_init(float x, float y, float z);

@@ -1,0 +1,43 @@
+Hidden-surface removal
+	Para uma posição, o pixel mais próximos é desenhado e os outros são ignorados
+	A medida que é desenhado um objeto, cada pixel dele é verificado com o pixel correspondente no z-buffer
+		Caso o valor já armazenado na posição seja menor (mais próximo), o pixel não é alterado
+	Depth buffer (z-buffer)
+		Buffer que armazena a distância no eixo z
+	Necessário ativar GL_DEPTH_TEST
+		glEnable(GL_DEPTH_TEST)
+	Para limpar o buffer (provávelmente a cada frame), incluír GL_DEPTH_BUFFER_BIT no glClear
+		glClear(... | GL_DEPTH_BUFFER_BIT)
+
+Tipos de luz
+	Ambiente
+		Luz que rebateu muito no ambiente e não é mais possível definir sua origem
+		Fator de brilho geral
+		Não depende da posição do objeto e nem do observador
+	Difusa
+		Espalha-se em todas as direções
+		A intensidade depende do ângulo que o raio atinge o objeto
+		Quanto menor o ângulo, mais intensa
+		Depende da posição da luz e do objeto
+	Especular
+		Direcional
+		Reflete em uma única direção
+		Depende da posição da luz, do objeto e do espectador
+		Torna-se mais visível quando o espectador está com a visão voltada para a origem da luz
+	Emissiva
+		Simula a luz originada de um objeto
+		Adiciona intensidade a luz ao objeto
+		Não adiciona luz ao ambiente
+
+Cores dos materiais
+	As propriedades de reflexão para cada tipo de luz são combinadas com cada tipo de luz correspondente no ambiente
+	As luzes ambientes e difusas definem a cor do objeto
+	A luz especular é normalmente branca ou cinza
+
+Passos para iluminar uma cena:
+	1.	Defina os vetores normais de todos os vértices de todos os objetos
+		Determinam a orientação do objeto relativa a origem da luz
+	2.	Crie, selecione e posicione fontes de luzes
+	3.	Crie e selecione um lighting model
+		Determina o nível da luz ambiente global e a localização efetiva do ponto de visão
+	4.	Defina as propriedades dos materiais na cena
