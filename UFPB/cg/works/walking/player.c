@@ -1,7 +1,7 @@
 #include "player.h"
 #include <GL/glut.h>
 
-const float PLAYER_JUMP = -100;
+const float PLAYER_JUMP = -20;
 
 Player player;
 
@@ -11,14 +11,24 @@ void player_init(float x, float y, float z)
 	player.position.y = y;
 	player.position.z = z;
 
-	player.orientation.x = 0;
-	player.orientation.y = 0;
-	player.orientation.z = 0;
-
 	player.acc = 0;
 }
 
-int lastX = -1, lastY = -1;
+/* Atualiza posição do jogador em caso de saltos */
+void player_updatePosition()
+{
+	if (player.position.y < 0)
+	{
+		player.position.y *= player.acc;
+		player.acc *= 0.9;
+
+		if (player.position.y > -0.05)
+		{
+			player.position.y = 0;
+			player.acc = 0;
+		}
+	}
+}
 
 void player_keyEventHandler(unsigned char key, int x, int y)
 {
@@ -32,18 +42,10 @@ void player_keyEventHandler(unsigned char key, int x, int y)
 					break;
 		case 'd':	player.position.x--;
 					break;
+		// Pula
 		case 'b':	player.position.y = PLAYER_JUMP;
 					player.acc = 1;
 	}
-
-	if (lastX != -1 && lastY != -1)
-	{
-		player.orientation.x += x - lastX;
-		player.orientation.y += y - lastY;
-	}
-
-	lastX = x;
-	lastY = y;
 
 	glutPostRedisplay();
 }
