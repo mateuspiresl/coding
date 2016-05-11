@@ -21,27 +21,24 @@ procedure generate(n : integer, A : array of any):
 
 void generate(string curr, int i)
 {
-	if (i - 1 < curr)
+	if (i - 1 < curr.size())
 	{
 		if (curr[i] != curr[i + 1])
 		{
-			swap(curr[i], curr[i + 1]);
-			cout << "," << curr;
-		}
-		else
-		{
+			for (int j  = i + 1; j < curr.size(); j++)
+			{
+				string str(curr);
 
-		}
+				swap(str[i], str[j]);
+				cout << "," << curr;
 
-		swap(curr[i], curr[n - 1]);
-		generate(curr, i + 1);
-		swap(curr[n-1], curr[i]);
+				generate(str, i + 1);
+			}
+		}
+		else generate(curr, i + 1);
 	}
 
-
-
-
-	if (n == 1)
+/*	if (n == 1)
 		cout << curr << ",";
 	else
 	{
@@ -56,7 +53,7 @@ void generate(string curr, int i)
 		}
 
 		generate(n - 1, curr);
-	}
+	}*/
 }
 
 int main(int argc, char* argv[])
@@ -68,7 +65,8 @@ int main(int argc, char* argv[])
 	{
 		sort(line.begin(), line.end());
 
-		generate(line.size(), line);
+		cout << line;
+		generate(line, 0);
 		cout << endl;
 	}
 
