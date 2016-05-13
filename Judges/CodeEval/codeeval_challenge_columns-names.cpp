@@ -7,11 +7,12 @@ using namespace std;
 string convert(int n)
 {
 	for (int e = 1; n >= 0; n -= 26^e, e++)
- 		cout << ((char) (n % 26 == 0 ? 'Z' : 'A' + (n % 26)));
+ 		cout << ((char) (n % 26 == 
+z0 ? 'Z' : 'A' + (n % 26)));
 
  	return "";
 	/*stringstream ss;
-	
+
 	int a = column % 26;
 	int div = (column - a) / 26;
 	int b = div % 26 - 1;
