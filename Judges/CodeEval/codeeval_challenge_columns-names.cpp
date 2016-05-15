@@ -6,11 +6,10 @@ using namespace std;
 
 string convert(int n)
 {
-	for (int e = 1; n >= 0; n -= 26^e, e++)
- 		cout << ((char) (n % 26 == 
-z0 ? 'Z' : 'A' + (n % 26)));
+	int a, b, c;
 
- 	return "";
+	c = n % 26;
+
 	/*stringstream ss;
 
 	int a = column % 26;
