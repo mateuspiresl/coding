@@ -1,0 +1,25 @@
+Design factors
+	Application domain represetation
+		Representação dos objetos
+			Representação geométrica da cena e dos objetos
+			Atualmente, a maioria dos hardwares usam triangulos como primitiva de redenrização fundamental
+			Consequentemente, a representação poligonal é a escolha natural
+			Sopa poligonal (mais genérico): um conjunto desordenado de polígonos sem nenhuma informação sobre conexão especificando a relação entre eles
+				Tende a ser menos eficiente e robusto
+				Não tem informação dobre o qual é a parte de dentro do objeto
+			Malha poligonal (mais comum): polígonos conectados a outros pelas bordas
+			Representação explícita: objetos definidos em termos de seus vertices, bordas e faces
+			Representação implícita: objetos que não podem ser representados da forma explícita, como cones, esféras, etc
+				Representados por expressões matemáticas
+				Usados como aproximações de objetos para testes rápidos
+			Geometria sólida construtiva (GSC): objetos são representados por uma árvore binária de primitivas sob operações básicas
+					Os objetos resultantes são sempre válidos
+		Geometrias de renderização e colisão
+			Deve-se ter duas geometrias separadas, razões:
+				1	Geometrias de renderização são muito complexas
+					Há limite de precisão para a detecção
+					Uma versão simplificada da geometria de renderização pode ser aplicada à de colisão
+						Bounding volumes
+				2	Geometrias de renderização tem um formato específico para acelerar a renderização
+					Ao invés de decodificar as geometrias em tempo de execução, deve ser fornecida uma geometria eficiente para a detecção
+				3	
