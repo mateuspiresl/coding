@@ -22,4 +22,8 @@ Design factors
 						Bounding volumes
 				2	Geometrias de renderização tem um formato específico para acelerar a renderização
 					Ao invés de decodificar as geometrias em tempo de execução, deve ser fornecida uma geometria eficiente para a detecção
-				3	
+				3	As informações da geometria de renderização são diferentes das de colisão
+					A de colisão não necessita de informações como cor, material e textura
+				4	As geometrias podem ser diferentes em design
+				5	As informações de colisão podem ficar na memória mesmo que o objeto não vá ser renderizado, pois o tamanho dessas informações é menor
+				6	
