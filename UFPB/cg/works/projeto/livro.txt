@@ -1,4 +1,4 @@
-Design factors
+Design factors (p 7)
 	Application domain represetation
 		Representação dos objetos
 			Representação geométrica da cena e dos objetos
@@ -26,4 +26,14 @@ Design factors
 					A de colisão não necessita de informações como cor, material e textura
 				4	As geometrias podem ser diferentes em design
 				5	As informações de colisão podem ficar na memória mesmo que o objeto não vá ser renderizado, pois o tamanho dessas informações é menor
-				6	
+				6	É mais fácil computar uma geometria sólida o que solidificar uma geometria na sua representação em sopa ou malha poligonal
+			Contras:
+				1	Duplicação de informações
+				2	Trabalho de produzir e fazer manutenção em dois objetos similares
+				3	Problemas de vesionamento e logística
+		Collision algorithm specialization
+			É sábio ter sistemas de colisão para cenários específicos
+				Como ter um sistema para detectar colisões entre objetos e outro sistema para detectar colisões entre objetos e cenários
+			Em mundos pequenos, as informações de colisão podem ficar na memória, mas em grandes, as informações devem ser carregadas e liberadas a medida que se fazem necessárias
+	Types of queries
+		
