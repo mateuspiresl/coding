@@ -3,32 +3,25 @@ import sys
 alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def rev(n):
-	if n <= 26:
-		return str(alpha[n - 1])
+	i = n % 27
+	n -= i
+	if n == 0:
+		return str(alpha[i])
+
+	n /= 27
+	j = n % 27
+	n -= j
+
+		#sys.stdout.write(str(i) + ' ' + str(j) + ' ' + str(k) + ' : ')
+	if n == 0:
+		return str(alpha[j]) + str(alpha[i])
+
+	n /= 27
+	k = n % 27
+
+		#sys.stdout.write(str(i) + ' ' + str(j) + ' ' + str(k) + ' : ')
 	
-	elif n <= 702:
-		n -= 1
-		k = n % 26
-		j = (n - k) / 26 - 1
-		
-		#sys.stdout.write(str(i) + ' ' + str(j) + ' ' + str(k) + ' : ')
-
-		return str(alpha[j]) + str(alpha[k])
-
-	else:
-		n -= 1
-		k = n % 26
-		n = (n - k) / 26
-		j = n % 26
-		n = (n - j) / 26
-		i = n % 26 - 1
-		
-		#sys.stdout.write(str(i) + ' ' + str(j) + ' ' + str(k) + ' : ')
-
-		try:
-			return str(alpha[i - 1]) + str(alpha[j - 1]) + str(alpha[k])
-		except IndexError:
-			raise NameError(str(i) + ' ' + str(j) + ' ' + str(k))
+	return str(alpha[k]) + str(alpha[j]) + str(alpha[i])
 
 hey = 1
 
