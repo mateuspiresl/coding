@@ -3,26 +3,36 @@ import sys
 alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def rev(n):
-	i = n % 27
-	n -= i
-	if n == 0:
-		return str(alpha[i])
-
-	n /= 27
-	j = n % 27
-	n -= j
-
-		#sys.stdout.write(str(i) + ' ' + str(j) + ' ' + str(k) + ' : ')
-	if n == 0:
-		return str(alpha[j]) + str(alpha[i])
-
-	n /= 27
-	k = n % 27
-
-		#sys.stdout.write(str(i) + ' ' + str(j) + ' ' + str(k) + ' : ')
+	un = n
 	
-	return str(alpha[k]) + str(alpha[j]) + str(alpha[i])
+	k = n % 26
+	if k == 0:
+		k = 26
 
+	ret = str(alpha[k - 1])
+
+	if un <= 26:
+		return ret
+
+	n = (n - k) /26
+	k = n % 26
+
+	ret = str(alpha[k - 1]) + ret
+
+	if un <= 702:
+		return ret
+
+	if (k == 0):
+		k = 26
+
+	n = (n - k) / 26
+	k = n % 26
+
+	ret = str(alpha[k - 1]) + ret
+
+	return ret
+
+showAll = True
 hey = 1
 
 for k in range(26):
@@ -34,8 +44,8 @@ for k in range(26):
 
 	g = str(alpha[k])
 
-	if g != rev(n):
-		sys.stdout.write('xx xx ' + str(k) + ' : ')
+	if g != rev(n) or showAll:
+		sys.stdout.write('0 0 ' + str(k + 1) + ' : ')
 		sys.stdout.write(str(n) + ' : \t')
 		print(g + ' / ' + rev(n))
 
@@ -52,8 +62,8 @@ for j in range(26):
 		g = str(alpha[j])
 		g += str(alpha[k])
 
-		if g != rev(n):
-			sys.stdout.write('xx ' + str(j) + ' ' + str(k) + ' : ')
+		if g != rev(n) or showAll:
+			sys.stdout.write('0 ' + str(j + 1) + ' ' + str(k + 1) + ' : ')
 			sys.stdout.write(str(n) + ' : \t')
 			print(g + ' / ' + rev(n))
 
@@ -72,7 +82,7 @@ for i in range(26):
 			g += str(alpha[j])
 			g += str(alpha[k])
 
-			if g != rev(n):
-				sys.stdout.write(str(i) + ' ' + str(j) + ' ' + str(k) + ' : ')
+			if g != rev(n) or showAll:
+				sys.stdout.write(str(i + 1) + ' ' + str(j + 1) + ' ' + str(k + 1) + ' : ')
 				sys.stdout.write(str(n) + ' : \t')
 				print(g + ' / ' + rev(n))

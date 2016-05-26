@@ -160,4 +160,35 @@ string lcs_seq_makeString(const string a, const string b, const char mem[51][51]
 	return result;
 }
 
+int lengthStringStar(string s)
+{
+	int len = 1;
+	int max = s.length() >> 1;
+
+	for (; len <= max; len++)
+	{
+		if (s.length() % len != 0)
+			continue;
+
+		int comp = len;
+
+		for (; comp < s.length(); comp++)
+			if (s[comp] != s[comp % len])
+				break;
+
+		if (comp == s.length())
+			return len;
+	}
+
+	return s.length();
+}
+
+int countStringStar(string s) {
+	return s.length() / lengthStringStar(s);
+}
+
+int getStringStar(string s) {
+	return s.substr(0, lengthStringStar(s));
+}
+
 #endif
