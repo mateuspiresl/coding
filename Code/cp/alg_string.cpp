@@ -187,8 +187,77 @@ int countStringStar(string s) {
 	return s.length() / lengthStringStar(s);
 }
 
-int getStringStar(string s) {
+string getStringStar(string s) {
 	return s.substr(0, lengthStringStar(s));
 }
+
+
+/* Knuth-Morris-Pratt (KMP) */
+
+int* kmp_process(const string& pattern)
+{
+	int* occurr = new int[pattern.length() + 1];
+	occurr[0] = -1;
+
+	int k = -1;
+
+	for (int i = 1; i <= pattern.length(); i++)
+	{
+		while (k >= 0 && pattern[k] != pattern[i - 1])
+			k = occurr[k];
+
+		occurr[i] = ++k;
+	}
+
+	return occurr;
+}
+
+int kmp(const string& text, const string& pattern, int* occurr, int& i, int& k)
+{
+	for (; i <= text.length(); i++)
+	{
+		while (k >= 0 && pattern[k] != text[i - 1])
+			k = occurr[k];
+
+		if (++k == pattern.length())
+		{
+			int iText = i - k;
+			k = occurr[k];
+			return iText;
+		}
+	}
+
+	return -1;
+}
+
+
+int kmp_get(const string& text, const string& pattern, vector<int>& positions)
+{
+	int i = 0, k = 0, pos;
+	vector<int>* is = new vector<int>;
+
+	while ((pos = kmp(text, pattern, kmp_process(pattern), i, k)) >= 0)
+		positions.push_back(pos);
+
+	return positions.size();
+}
+
+int kmp_count(const string& text, const string& pattern)
+{
+	int i = 0, k = 0, count = 0;
+
+	while (kmp(text, pattern, kmp_process(pattern), i, k) > 0)
+		count++;
+
+	return count;
+}
+
+bool kmp_contains(const string& text, const string& pattern)
+{
+	int i = 0, k = 0;
+	return kmp(text, pattern, kmp_process(pattern), i, k) >= 0;
+}
+
+/* END Knuth-Morris-Pratt (KMP) */
 
 #endif
