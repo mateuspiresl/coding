@@ -57,7 +57,7 @@ int main()
 		// cout << "\tbiggest:" << endl;
 		// printMatrix(biggest, biggestSize);
 
-		long* matches = new long[4];
+		long* matches = new long[4] {0};
 		for range(i, 4)
 		{
 			if (i > 0)
